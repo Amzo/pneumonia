@@ -7,7 +7,7 @@
 ## Project information
 This project is experimentation to create a model that uses static images of chest x-rays to detect pneumonia on an early stage.
 	
-## Technologies
+## Technologies 
 Project is created in:
 
 Google collaboration file for pneumonia detection:
