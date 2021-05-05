@@ -4,7 +4,7 @@
 * [Project information](#project-info)
 * [Technologies](#technologies)
 
-## General info
+## Project information
 This project is experimentation to create a model that uses static images of chest x-rays to detect pneumonia on an early stage.
 	
 ## Technologies
