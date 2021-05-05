@@ -11,7 +11,7 @@ Project made by:
 Anthony Donnelly, John Robson, Gabriela Piatek, Navil Hassan
 	
 ## Technologies 
-Project is created in:
+Project is devided into parts such as:
 
 Google collaboration file for pneumonia detection:
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Amzo/pneumonia/blob/main/cnnModels.ipynb)
