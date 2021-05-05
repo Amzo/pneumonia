@@ -10,15 +10,11 @@ This project is experimentation to create a model that uses static images of che
 ## Technologies
 Project is created in:
 
-Google collaboration file for pneumonia detection
-[![Open In Colab]
-(https://colab.research.google.com/assets/colab-badge.svg)]
-(https://colab.research.google.com/github/Amzo/pneumonia/blob/main/cnnModels.ipynb)
+Google collaboration file for pneumonia detection:
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Amzo/pneumonia/blob/main/cnnModels.ipynb)
 
 Baseline model 
-[![Open In Colab]
-(https://colab.research.google.com/assets/colab-badge.svg)]
-(https://colab.research.google.com/github/Amzo/pneumonia/blob/main/baseline.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Amzo/pneumonia/blob/main/baseline.ipynb)
 
 
 
