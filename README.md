@@ -1,7 +1,7 @@
 # Pneumonia project for KF5012 module
 
 ## Table of contents
-* [Project information](#project information)
+* [Project information](#project-info)
 * [Technologies](#technologies)
 
 ## Project information
