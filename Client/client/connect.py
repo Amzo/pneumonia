@@ -2,6 +2,7 @@
 
 import socket
 import time
+
 def makeConnection(port, host):
 	remote = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	remote.connect(('127.0.1.1',50022))
@@ -19,11 +20,26 @@ def sendImage(imageFile):
 			break
 
 		remote.sendall(chunk)
-	sendFile.close
 
+	sendFile.close()
+	print("image file sent")
 
+	remote.close()
+
+def receivePred():
+	remote = makeConnection(50022, "127.0.1.1")
+	print("receiving prediction")
+	pred = remote.recv(1024)
+	remote.close()
+
+	print("Normal" if pred.decode("utf-8")  == "0" else "Pneumonia")
 
 
 image = "test.jpeg"
 
-data = sendImage(image)
+sendImage(image)
+
+receivePred()
+
+#print(results.decode("utf-8"))
+

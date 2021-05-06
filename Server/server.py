@@ -9,6 +9,11 @@ host, port = parseConfig('ini/config.ini')
 imageName = "pneumonia%s.jpg"
 incomingFolder = "temp"
 
+def makePrediction(connection, imageFile):
+	connected,addr, = connection.accept()
+	connected.sendall(b'1')
+	connected.close()
+
 def parseImage(data, saveLocation):
 	# Save each image into temp with random num
 	randNum =random.randint(0,10)
@@ -17,9 +22,9 @@ def parseImage(data, saveLocation):
 	imageFile.write(data)
 	imageFile.close()
 
-def serverListen(host, port):
-	data = b''
+	return (imageName % randNum)
 
+def waitForConnection(host, port):
 	# Create a TCP/IP socket
 	server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -28,13 +33,15 @@ def serverListen(host, port):
 	print('starting up on %s port %s' % server_address)
 	server.bind(server_address)
 
-	# Listen for incoming connections
 	server.listen()
 
-	# Keep up with the queues of outgoing messages
-	message_queues = {}
+	return server
 
-	connected, addr = server.accept()
+def receiveImage(connection):
+	data = b''
+
+	print("waiting for image")
+	connected, addr = connection.accept()
 
 	incommingTotal = b''
 	while True:
@@ -42,12 +49,21 @@ def serverListen(host, port):
 
 		if not incommingPart:
 			break
-		print("Received 4096 bytes")
 		incommingTotal += incommingPart
 
 	print("Image received")
-	parseImage(incommingTotal, incomingFolder)
-#	connected.sendall(b'Image saved')
+	savedName = parseImage(incommingTotal, incomingFolder)
 
+	return savedName
 
-serverListen(host, port)
+	connected.close()
+
+while True:
+	try:
+		connection
+	except NameError:
+		connection = waitForConnection(host, port)
+
+	imageFile = receiveImage(connection)
+
+	makePrediction(connection, imageFile)
