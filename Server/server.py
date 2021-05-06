@@ -19,13 +19,14 @@ def serverListen(host, port):
 	message_queues = {}
 
 	connected, addr = server.accept()
+
 	with connected:
 		print('Connected by', addr)
 		while True:
-			data = conn.recv(1024)
+			data = connected.recv(1024)
 			if not data:
 				 break
-			connection.sendall(data)
+			connected.sendall(data)
 
 
 host, port = parseConfig('ini/config.ini')
