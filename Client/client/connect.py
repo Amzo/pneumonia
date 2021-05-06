@@ -32,14 +32,6 @@ def receivePred():
 	pred = remote.recv(1024)
 	remote.close()
 
-	print("Normal" if pred.decode("utf-8")  == "0" else "Pneumonia")
+	results = ("Normal" if pred.decode("utf-8")  == "0" else "Pneumonia")
 
-
-image = "test.jpeg"
-
-sendImage(image)
-
-receivePred()
-
-#print(results.decode("utf-8"))
-
+	return results
