@@ -1,9 +1,25 @@
 #!/usr/bin/env python3
 
 from lib.configparser import parseConfig
-import select, socket, sys
+import select, socket, sys, random
+import time
+
+# Set up some global variables
+host, port = parseConfig('ini/config.ini')
+imageName = "pneumonia%s.jpg"
+incomingFolder = "temp"
+
+def parseImage(data, saveLocation):
+	# Save each image into temp with random num
+	randNum =random.randint(0,10)
+
+	imageFile = open(imageName % randNum, 'wb')
+	imageFile.write(data)
+	imageFile.close()
 
 def serverListen(host, port):
+	data = b''
+
 	# Create a TCP/IP socket
 	server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -20,16 +36,18 @@ def serverListen(host, port):
 
 	connected, addr = server.accept()
 
-	with connected:
-		print('Connected by', addr)
-		while True:
-			data = connected.recv(1024)
-			if not data:
-				 break
-			connected.sendall(data)
+	incommingTotal = b''
+	while True:
+		incommingPart = connected.recv(4096)
+
+		if not incommingPart:
+			break
+		print("Received 4096 bytes")
+		incommingTotal += incommingPart
+
+	print("Image received")
+	parseImage(incommingTotal, incomingFolder)
+#	connected.sendall(b'Image saved')
 
 
-host, port = parseConfig('ini/config.ini')
-
-print(host, port)
 serverListen(host, port)

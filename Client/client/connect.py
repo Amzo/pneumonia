@@ -1,15 +1,29 @@
 #!/usr/bin/env python3
 
 import socket
+import time
+def makeConnection(port, host):
+	remote = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	remote.connect(('127.0.1.1',50022))
 
-def makeConnection(port, host, data):
-	with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as remote:
-		remote.connect(('127.0.0.1',50022))
-		remote.sendall('Hello, world')
+	return remote
 
-		data = remote.recv(1024)
-		print('Received', repr(data))
+def sendImage(imageFile):
+	sendFile = open(imageFile, 'rb')
+
+	remote = makeConnection(50022, "127.0.1.1")
+
+	while True:
+		chunk = sendFile.read(4096)
+		if not chunk:
+			break
+
+		remote.sendall(chunk)
+	sendFile.close
 
 
 
 
+image = "test.jpeg"
+
+data = sendImage(image)
