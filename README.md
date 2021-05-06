@@ -29,7 +29,12 @@ pneumoniaDetect.py file is a copied GUI over.
 README.md file, which helps to provide all neccessary information about the project and files.  
 
 
+## Documentation
 
+## Server
+
+
+## Client
 
 
 
