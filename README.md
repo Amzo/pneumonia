@@ -8,7 +8,7 @@
 ## Project information
 This project is experimentation to create a model that uses static images of chest x-rays to detect pneumonia on an early stage.
 Project made by:
-Anthony Donnelly, John Robson, Gabriela Piatek, Navil Hassan
+Anthony Donnelly, John Robson, Gabriela Piatek, Navil Hassan 
 	
 ## Technologies 
 Project is devided into parts such as:
