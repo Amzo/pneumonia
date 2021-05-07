@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'gui/ui/mainwindow.ui',
 # licensing of 'gui/ui/mainwindow.ui' applies.
 #
-# Created: Thu May  6 15:17:56 2021
+# Created: Thu May  6 15:49:38 2021
 #      by: pyside2-uic  running on PySide2 5.13.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -72,8 +72,11 @@ class Ui_MainWindow(object):
         self.label_4.setObjectName("label_4")
         self.horizontalLayout.addWidget(self.label_4)
         self.modelList = QtWidgets.QComboBox(self.groupBox_3)
-        self.modelList.setMaximumSize(QtCore.QSize(75, 25))
+        self.modelList.setMaximumSize(QtCore.QSize(100, 25))
         self.modelList.setObjectName("modelList")
+        self.modelList.addItem("")
+        self.modelList.addItem("")
+        self.modelList.addItem("")
         self.modelList.addItem("")
         self.modelList.addItem("")
         self.modelList.addItem("")
@@ -127,9 +130,12 @@ class Ui_MainWindow(object):
         self.browseFilesButton.setText(QtWidgets.QApplication.translate("MainWindow", "Browse Files", None, -1))
         self.groupBox_3.setTitle(QtWidgets.QApplication.translate("MainWindow", "Model Options", None, -1))
         self.label_4.setText(QtWidgets.QApplication.translate("MainWindow", "Model", None, -1))
-        self.modelList.setItemText(0, QtWidgets.QApplication.translate("MainWindow", "CNN", None, -1))
-        self.modelList.setItemText(1, QtWidgets.QApplication.translate("MainWindow", "ResNet50", None, -1))
-        self.modelList.setItemText(2, QtWidgets.QApplication.translate("MainWindow", "vgg16", None, -1))
+        self.modelList.setItemText(0, QtWidgets.QApplication.translate("MainWindow", "Inception", None, -1))
+        self.modelList.setItemText(1, QtWidgets.QApplication.translate("MainWindow", "Resnet", None, -1))
+        self.modelList.setItemText(2, QtWidgets.QApplication.translate("MainWindow", "VGG", None, -1))
+        self.modelList.setItemText(3, QtWidgets.QApplication.translate("MainWindow", "myCNN", None, -1))
+        self.modelList.setItemText(4, QtWidgets.QApplication.translate("MainWindow", "Xception", None, -1))
+        self.modelList.setItemText(5, QtWidgets.QApplication.translate("MainWindow", "Densenet", None, -1))
         self.useBruteForce.setText(QtWidgets.QApplication.translate("MainWindow", "Remote", None, -1))
         self.saveModel.setText(QtWidgets.QApplication.translate("MainWindow", "Local", None, -1))
         self.predictButton.setText(QtWidgets.QApplication.translate("MainWindow", "Predict", None, -1))

@@ -4,19 +4,65 @@ from lib.configparser import parseConfig
 import select, socket, sys, random
 import time
 
-# Set up some global variables
-host, port = parseConfig('ini/config.ini')
-imageName = "pneumonia%s.jpg"
-incomingFolder = "temp"
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 
-def makePrediction(connection, imageFile):
+import tensorflow as tf
+import numpy as np
+import cv2
+
+host, port = parseConfig('ini/config.ini')
+
+# GPU setup
+physical_devices = tf.config.experimental.list_physical_devices('GPU')
+assert len(physical_devices) > 0, "Not enough GPU hardware devices available"
+config = tf.config.experimental.set_memory_growth(physical_devices[0], True)
+
+imageName = "pneumonia%s.jpg"
+incomingFolder = "./temp/"
+modelFolder = "./models/"
+selectedModel = "myCNN"
+
+def requestModel(connection):
+	print("Waiting for model")
+
+	connected, addr = connection.accept()
+
+	model = connected.recv(1024).decode()
+
+	connected.close()
+	selectedModel = str(model)
+	print(model)
+
+def prepareImage(imageFile):
+	image = cv2.imread(imageFile)
+	image = cv2.resize(image,(224,224))
+	image = np.asarray(image)
+	image = np.expand_dims(image, axis=0)
+
+	return image
+
+def makePrediction(connection, imageFile, model):
 	connected,addr, = connection.accept()
-	connected.sendall(b'1')
+	print(modelFolder + model)
+	trainedModel = tf.keras.models.load_model(modelFolder + model)
+
+	processedImage = prepareImage(imageFile)
+
+	pred = np.argmax(trainedModel.predict(processedImage), axis=-1)
+
+	if pred == 0:
+		results = "Normal"
+	else:
+		results = "Pneumoni"
+
+	print("prediction is " + results)
+	connected.sendall(results.encode())
 	connected.close()
 
 def parseImage(data, saveLocation):
 	# Save each image into temp with random num
-	randNum =random.randint(0,10)
+	randNum =random.randint(0,100)
 
 	imageFile = open(imageName % randNum, 'wb')
 	imageFile.write(data)
@@ -38,8 +84,6 @@ def waitForConnection(host, port):
 	return server
 
 def receiveImage(connection):
-	data = b''
-
 	print("waiting for image")
 	connected, addr = connection.accept()
 
@@ -66,4 +110,6 @@ while True:
 
 	imageFile = receiveImage(connection)
 
-	makePrediction(connection, imageFile)
+	model = requestModel(connection)
+
+	makePrediction(connection, imageFile, selectedModel)

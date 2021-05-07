@@ -6,9 +6,8 @@ def parseConfig(filename):
 	config = configparser.ConfigParser()
 	config.read(filename)
 
-	host = config['Server']
+	server = config['Server']
 	port = config['Port']
 
 
-	return host['servername'], port['port']
-
+	return server['serverName'], port['port']

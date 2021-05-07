@@ -137,23 +137,38 @@
               <widget class="QComboBox" name="modelList">
                <property name="maximumSize">
                 <size>
-                 <width>75</width>
+                 <width>100</width>
                  <height>25</height>
                 </size>
                </property>
                <item>
                 <property name="text">
-                 <string>CNN</string>
+                 <string>Inception</string>
                 </property>
                </item>
                <item>
                 <property name="text">
-                 <string>ResNet50</string>
+                 <string>Resnet</string>
                 </property>
                </item>
                <item>
                 <property name="text">
-                 <string>vgg16</string>
+                 <string>VGG</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>myCNN</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Xception</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Densenet</string>
                 </property>
                </item>
               </widget>
