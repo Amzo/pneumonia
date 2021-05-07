@@ -108,8 +108,20 @@ while True:
 	except NameError:
 		connection = waitForConnection(host, port)
 
-	imageFile = receiveImage(connection)
+	# Execute the function depending on the request
+	connected, addr = connection.accept()
+	message = connected.recv(4096).decode()
 
-	model = requestModel(connection)
+	print("Received: " + message)
+	connected.close()
 
-	makePrediction(connection, imageFile, selectedModel)
+	if message == "FILE":
+		imageFile = receiveImage(connection)
+	elif message == "MODEL":
+		model = requestModel(connection)
+	elif message == "PRED":
+		makePrediction(connection, imageFile, selectedModel)
+	elif message == "BYE":
+		connection.close()
+	else:
+		print("invalid request")
