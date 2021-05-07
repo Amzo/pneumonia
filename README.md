@@ -31,6 +31,12 @@ README.md file, which helps to provide all neccessary information about the proj
 
 ## Documentation
 
+The documentation section shows the exact missions prepared by our team:
+Anthony - 
+Gabriela -
+John -
+Navil -
+
 ## Server
 
 This is a simple server written in python which accept numerous commands to be able to receive and image and make a prediction of the image and return the result
