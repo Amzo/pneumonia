@@ -9,12 +9,12 @@ import socket
 import time
 import os
 
-def getReply():
+def getReply(remote):
 	response = remote.recv(1).decode()
 
 	return response
 
-def sendMessage(msg):
+def sendMessage(msg, remote):
 	# our packets should be four bytes
 	# prevent hanging
 	if len(msg) > 4 or len(msg) < 4:
@@ -22,11 +22,11 @@ def sendMessage(msg):
 	else:
 		print("Sending Commands: " + msg)
 		remote.sendall(msg.encode())
-		response = getReply()
+		response = getReply(remote)
 		return response
 
-def sendModel(model):
-	response = sendMessage("MODE")
+def sendModel(model, remote):
+	response = sendMessage("MODE", remote)
 
 	if response == "0":
 		print("Got OK response, sending model")
@@ -36,13 +36,13 @@ def sendModel(model):
 		remote.sendall(model.encode())
 
 		print("Model sent, waiting reply")
-		reply = getReply()
+		reply = getReply(remote)
 		print("Got reply: " + reply)
 
-def sendImage(imageFile):
+def sendImage(imageFile, remote):
 	bufferSize = 4096
 
-	response = sendMessage("FILE")
+	response = sendMessage("FILE", remote)
 	if response == "0":
 		print("Got OK response, sending file size and file")
 
@@ -58,7 +58,7 @@ def sendImage(imageFile):
 
 		print(len(dummysize))
 		remote.sendall(dummysize.encode())
-		response = getReply()
+		response = getReply(remote)
 
 		while filesize % bufferSize != 0:
 			bufferSize -= 1
@@ -79,11 +79,11 @@ def sendImage(imageFile):
 			sendFile.close()
 			print("image file sent")
 
-def receivePred():
-	response = sendMessage("PRED")
+def receivePred(remote):
+	response = sendMessage("PRED", remote)
 
 	if response == "0":
-		pred =  getReply()
+		pred =  getReply(remote)
 		print("prediciton is " + pred)
 
 		return pred

@@ -8,6 +8,7 @@ from gui.ui.ui_mainwindow import Ui_MainWindow
 from lib import file
 from lib import errors
 from client import connect as server
+import socket
 
 class MainWindow(QMainWindow):
 	def __init__(self):
@@ -17,10 +18,23 @@ class MainWindow(QMainWindow):
 		self.connectSignalsSlots()
 		self.model = ''
 		self.imageFile = ''
+		self.remote = ''
 
 	def connectSignalsSlots(self):
 		imageFile = self.ui.browseFilesButton.clicked.connect(self.bbrowseFiles)
 		self.ui.predictButton.clicked.connect(self.getPrediction)
+
+	def connect(self):
+		self.remote = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		self.remote.connect(('127.0.1.1',50022))
+
+		response = server.getReply(self.remote)
+
+		if response == "?":
+			print("Connected to server")
+			return True
+		else:
+			return False
 
 	def bbrowseFiles(self):
 		fileName = file.browseFiles()
@@ -31,16 +45,22 @@ class MainWindow(QMainWindow):
 
 	def sendModels(self):
 		self.model = str(self.ui.modelList.currentText())
-		reply = server.sendModel(self.model)
-
-		return reply
+		reply = server.sendModel(self.model, self.remote)
 
 	def getPrediction(self):
-		self.ui.lblPredict.setText("Sending image file")
-		server.sendImage(self.imageFile)
+		connected = self.connect()
 
-		response = self.sendModels()
+		if connected:
+			self.ui.lblPredict.setText("Sending image file")
+			server.sendImage(self.imageFile, self.remote)
 
-		if response == "0":
-			pred = server.receivePred()
+			self.sendModels()
+
+			pred = server.receivePred(self.remote)
+
+			if pred == "P":
+				pred = "Pneumonia"
+			else:
+				pred = "Normal"
+
 			self.ui.lblPredict.setText(pred)
