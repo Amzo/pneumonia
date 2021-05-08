@@ -87,17 +87,3 @@ def receivePred():
 		print("prediciton is " + pred)
 
 		return pred
-
-
-remote = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-remote.connect(('127.0.1.1',50022))
-
-response = getReply()
-
-if response == "?":
-	print("Connected to server")
-
-	sendImage('/home/amzo/University/AI/xray_images/test/NORMAL/IM-0001-0001.jpeg')
-	sendModel("ince")
-	receivePred()
-	sendMessage("BYE!")
