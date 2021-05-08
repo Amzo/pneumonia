@@ -24,12 +24,27 @@ The repository of the project contains cnnModels.ipynb, pneumoniaDetect.py, READ
 
 The first cnnModels.ipnyb file is the most important file of our project, the notebook where the project either trained or loaded 4 additional models ontop of our model that we have created. 
 
-pneumoniaDetect.py file is a copied GUI over.  
+pneumoniaDetect.py file is a copied GUI over.   
 
 README.md file, which helps to provide all neccessary information about the project and files.  
 
 
 ## Documentation
+
+The documentation section shows the exact missions prepared by our team:
+
+Anthony - 
+
+
+Gabriela -
+
+
+John -
+
+
+Navil -
+
+
 
 ## Server
 
@@ -49,14 +64,14 @@ Full documentation can be foudd [here](https://github.com/Amzo/pneumonia/tree/ma
 
 ## Client
 
-minimalistic gui and [connect.py](https://github.com/Amzo/pneumonia/blob/main/Client/client/connect.py) file to add some basic functions to allow sending and receiving replies from the server.
+Minimalistic gui and [connect.py](https://github.com/Amzo/pneumonia/blob/main/Client/client/connect.py) file to add some basic functions to allow sending and receiving replies from the server.
 
 [connect.py](https://github.com/Amzo/pneumonia/blob/main/Client/client/connect.py) can be included into any python script and allow sending files to to the server.
 
 
-An example gui makign use of [connect.py](https://github.com/Amzo/pneumonia/blob/main/Client/client/connect.py) can also be found [here](https://github.com/Amzo/pneumonia/blob/main/Client/pneumoniaDetect.py)
+An example gui makign use of [connect.py](https://github.com/Amzo/pneumonia/blob/main/Client/client/connect.py) can also be found [here](https://github.com/Amzo/pneumonia/blob/main/Client/pneumoniaDetect.py).
 
-For full documentation on the client check [here](https://github.com/Amzo/pneumonia/tree/main/Documentation/Anthony/client)
+For full documentation on the client check [here](https://github.com/Amzo/pneumonia/tree/main/Documentation/Anthony/client).
 
 
 
