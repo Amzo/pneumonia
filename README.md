@@ -24,7 +24,7 @@ The repository of the project contains cnnModels.ipynb, pneumoniaDetect.py, READ
 
 The first cnnModels.ipnyb file is the most important file of our project, the notebook where the project either trained or loaded 4 additional models ontop of our model that we have created. 
 
-pneumoniaDetect.py file is a copied GUI over.  
+pneumoniaDetect.py file is a copied GUI over.   
 
 README.md file, which helps to provide all neccessary information about the project and files.  
 
