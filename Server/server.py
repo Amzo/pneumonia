@@ -133,6 +133,8 @@ def removeClient(connected, msg):
 	except KeyError:
 		print("client already removed")
 
+	return False
+
 def parseCommand(connected):
 		stillThere = True
 		timeout = 0
@@ -153,8 +155,8 @@ def parseCommand(connected):
 					message = connected.recv(4).decode()
 				except Exception as e:
 					print(f"{e}")
-					removeClient(connected, "Error occured")
-					stillThere = False
+					stillThere = removeClient(connected, "Error occured")
+					break
 				timeout += 1
 
 			if stillThere:
@@ -179,7 +181,8 @@ def parseCommand(connected):
 						makePrediction(connected, imageFile, selectedModel)
 				elif message == "BYE!":
 					sendMessage(connected, "0")
-					removeClient(connected, "bye")
+					stillThere = removeClient(connected, "bye")
+					break
 				else:
 					print(f"[*] invalid request: {message}")
 
