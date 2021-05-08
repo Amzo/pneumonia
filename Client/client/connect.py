@@ -80,20 +80,13 @@ def sendImage(imageFile):
 			print("image file sent")
 
 def receivePred():
-	response = getReply()
+	response = sendMessage("PRED")
 
-	if response == "?":
-		print("Requesting a prediction")
-		response = sendMessage("PRED")
-		print("Command pred sent")
-		print(response)
-		if response == "1":
-			print("Error 1: No model or image sent")
-		else:
-			pred =  getReply()
-			print("prediciton is " + pred)
+	if response == "0":
+		pred =  getReply()
+		print("prediciton is " + pred)
 
-			return pred
+		return pred
 
 
 remote = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -105,6 +98,6 @@ if response == "?":
 	print("Connected to server")
 
 	sendImage('/home/amzo/University/AI/xray_images/test/NORMAL/IM-0001-0001.jpeg')
-#	sendModel("ince")
-#receivePred()
-#sendMessage("BYE!")
+	sendModel("ince")
+	receivePred()
+	sendMessage("BYE!")
