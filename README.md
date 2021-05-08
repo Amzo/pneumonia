@@ -32,6 +32,7 @@ README.md file, which helps to provide all neccessary information about the proj
 ## Documentation
 
 The documentation section shows the exact missions prepared by our team:
+
 Anthony - 
 Gabriela -
 John -
