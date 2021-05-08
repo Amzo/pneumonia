@@ -64,14 +64,14 @@ Full documentation can be foudd [here](https://github.com/Amzo/pneumonia/tree/ma
 
 ## Client
 
-minimalistic gui and [connect.py](https://github.com/Amzo/pneumonia/blob/main/Client/client/connect.py) file to add some basic functions to allow sending and receiving replies from the server.
+Minimalistic gui and [connect.py](https://github.com/Amzo/pneumonia/blob/main/Client/client/connect.py) file to add some basic functions to allow sending and receiving replies from the server.
 
 [connect.py](https://github.com/Amzo/pneumonia/blob/main/Client/client/connect.py) can be included into any python script and allow sending files to to the server.
 
 
-An example gui makign use of [connect.py](https://github.com/Amzo/pneumonia/blob/main/Client/client/connect.py) can also be found [here](https://github.com/Amzo/pneumonia/blob/main/Client/pneumoniaDetect.py)
+An example gui makign use of [connect.py](https://github.com/Amzo/pneumonia/blob/main/Client/client/connect.py) can also be found [here].(https://github.com/Amzo/pneumonia/blob/main/Client/pneumoniaDetect.py)
 
-For full documentation on the client check [here](https://github.com/Amzo/pneumonia/tree/main/Documentation/Anthony/client)
+For full documentation on the client check [here](https://github.com/Amzo/pneumonia/tree/main/Documentation/Anthony/client).
 
 
 
