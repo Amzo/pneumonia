@@ -31,13 +31,16 @@ class MainWindow(QMainWindow):
 
 	def sendModels(self):
 		self.model = str(self.ui.modelList.currentText())
-		server.sendModel(self.model)
+		reply = server.sendModel(self.model)
+
+		return reply
 
 	def getPrediction(self):
 		self.ui.lblPredict.setText("Sending image file")
 		server.sendImage(self.imageFile)
 
-		self.sendModels()
+		response = self.sendModels()
 
-		pred = server.receivePred()
-		self.ui.lblPredict.setText(pred)
+		if response == "0":
+			pred = server.receivePred()
+			self.ui.lblPredict.setText(pred)

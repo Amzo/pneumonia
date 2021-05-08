@@ -21,11 +21,17 @@ PORT = "50022"
 
 The server will listen for specific commands.
 
+Before sending a command, the server will send "?" to see if the client is connected still.
+Receive and handle this before sending a command.
+
+All commands are 4 bytes and after a command is sent a response will 1 byte response will be sent back indicating 
+an error or success. Success is indicated by a reply of 0
+
 1) FILE
 
 Sending a packet containing the text "FILE" will let the server know that the next incoming data will be a file
 
-2) MODEL
+2) MODE
 
 This will let the server know that the next incoming data will be the requested model to run the predictions on
 
