@@ -76,7 +76,7 @@ An interface for the following devices can be used:
 
 An example client is available in the client folder also written in python
 
-Full documentation can be foudd [here](https://github.com/Amzo/pneumonia/tree/main/Documentation/Anthony/server)
+Full documentation can be found [here](https://github.com/Amzo/pneumonia/tree/main/Documentation/Anthony/server)
 
 ## Client
  
