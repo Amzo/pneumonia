@@ -8,7 +8,8 @@ from gui.ui.ui_mainwindow import Ui_MainWindow
 from lib import file
 from lib import errors
 from client import connect as server
-import socket
+from threading import Thread
+import socket, sys
 
 class MainWindow(QMainWindow):
 	def __init__(self):
@@ -23,9 +24,13 @@ class MainWindow(QMainWindow):
 		self.Failed = False
 
 	def connectSignalsSlots(self):
-		imageFile = self.ui.browseFilesButton.clicked.connect(self.bbrowseFiles)
+		self.ui.browseFilesButton.clicked.connect(self.bbrowseFiles)
 		self.ui.predictButton.clicked.connect(self.getPrediction)
 		self.ui.fileList.itemSelectionChanged.connect(self.showImage)
+		self.ui.actionExit.triggered.connect(self.quit)
+
+	def quit(self):
+		sys.exit(0)
 
 	def connect(self):
 		self.remote = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

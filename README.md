@@ -4,6 +4,10 @@
 * [Project information](#project-info)
 * [Technologies](#technologies)
 * [Repository](#repository)
+* [Documentation(#documentation)
+* [Solution Devvelopment Report](#Solution Development report)
+* [Server](#server)
+* [Client](#client)
 
 ## Project information
 This project is experimentation to create a model that uses static images of chest x-rays to detect pneumonia on an early stage.
@@ -45,7 +49,13 @@ John -
 Navil -
 
 
+## Solution Development report
 
+### Pipeline Evaluations
+### Model Evaluations
+### Parameter Justifications
+
+### Reproducible Code
 ## Server
 
 This is a simple server written in python which accept numerous commands to be able to receive and image and make a prediction of the image and return the result

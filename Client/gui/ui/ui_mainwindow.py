@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'gui/ui/mainwindow.ui',
 # licensing of 'gui/ui/mainwindow.ui' applies.
 #
-# Created: Sun May  9 11:00:51 2021
+# Created: Sun May  9 11:28:34 2021
 #      by: pyside2-uic  running on PySide2 5.13.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -98,9 +98,6 @@ class Ui_MainWindow(object):
         self.lblFilename.setObjectName("lblFilename")
         self.gridLayout.addWidget(self.lblFilename, 0, 0, 1, 1)
         self.tabWidget.addTab(self.Predict, "")
-        self.tab_2 = QtWidgets.QWidget()
-        self.tab_2.setObjectName("tab_2")
-        self.tabWidget.addTab(self.tab_2, "")
         self.gridLayout_3.addWidget(self.tabWidget, 1, 0, 1, 1)
         self.gridLayout_2.addLayout(self.gridLayout_3, 0, 1, 1, 1)
         self.groupBox_4 = QtWidgets.QGroupBox(self.centralwidget)
@@ -129,11 +126,11 @@ class Ui_MainWindow(object):
         self.menuFile = QtWidgets.QMenu(self.menuBar)
         self.menuFile.setObjectName("menuFile")
         MainWindow.setMenuBar(self.menuBar)
-        self.actionOpen = QtWidgets.QAction(MainWindow)
-        self.actionOpen.setObjectName("actionOpen")
+        self.actionExit = QtWidgets.QAction(MainWindow)
+        self.actionExit.setObjectName("actionExit")
         self.actionSave = QtWidgets.QAction(MainWindow)
         self.actionSave.setObjectName("actionSave")
-        self.menuFile.addAction(self.actionOpen)
+        self.menuFile.addAction(self.actionExit)
         self.menuFile.addSeparator()
         self.menuBar.addAction(self.menuFile.menuAction())
 
@@ -155,11 +152,10 @@ class Ui_MainWindow(object):
         self.groupBox.setTitle(QtWidgets.QApplication.translate("MainWindow", "Prediction", None, -1))
         self.lblFilename.setText(QtWidgets.QApplication.translate("MainWindow", "Selected Image: ", None, -1))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Predict), QtWidgets.QApplication.translate("MainWindow", "Predict", None, -1))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QtWidgets.QApplication.translate("MainWindow", "About", None, -1))
         self.groupBox_4.setTitle(QtWidgets.QApplication.translate("MainWindow", "File(s)", None, -1))
         self.browseFilesButton.setText(QtWidgets.QApplication.translate("MainWindow", "Browse Files", None, -1))
         self.groupBox_2.setTitle(QtWidgets.QApplication.translate("MainWindow", "Server Output", None, -1))
         self.menuFile.setTitle(QtWidgets.QApplication.translate("MainWindow", "File", None, -1))
-        self.actionOpen.setText(QtWidgets.QApplication.translate("MainWindow", "Exit", None, -1))
+        self.actionExit.setText(QtWidgets.QApplication.translate("MainWindow", "Exit", None, -1))
         self.actionSave.setText(QtWidgets.QApplication.translate("MainWindow", "Save", None, -1))
 

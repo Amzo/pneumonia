@@ -141,7 +141,6 @@ def removeClient(connected, msg):
 def parseCommand(connected):
 		stillThere = True
 		timeout = 0
-
 		# Execute the function depending on the request
 		while stillThere:
 			message = ''
@@ -185,6 +184,7 @@ def parseCommand(connected):
 					break
 				else:
 					log(f"[WARN] Invalid request from {clientAddress}: {message}", "warning")
+					stillThere = removeClient(connected, "Invalid command")
 
 def waitForClient(socket):
 	try:

@@ -206,11 +206,6 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="tab_2">
-         <attribute name="title">
-          <string>About</string>
-         </attribute>
-        </widget>
        </widget>
       </item>
      </layout>
@@ -261,12 +256,12 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionOpen"/>
+    <addaction name="actionExit"/>
     <addaction name="separator"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
-  <action name="actionOpen">
+  <action name="actionExit">
    <property name="text">
     <string>Exit</string>
    </property>
