@@ -37,16 +37,16 @@ README.md file, which helps to provide all neccessary information about the proj
 
 The documentation section shows the exact missions prepared by our team:
 
-Anthony - Baseline Implementation & User Interface
+Anthony Donnelly - Baseline Implementation & User Interface
 
 
-Gabriela - Project Ideation & Solution Review
+Gabriela Piatek - Project Ideation & Solution Review 
 
 
-John - Ethical Evaluation & Solution Testing
+John Robson - Ethical Evaluation & Solution Testing
 
 
-Navil - Project Management & Solution Design
+Navil Hassan - Project Management & Solution Design
 
 
 ## Solution Development report
@@ -79,7 +79,7 @@ An example client is available in the client folder also written in python
 Full documentation can be foudd [here](https://github.com/Amzo/pneumonia/tree/main/Documentation/Anthony/server)
 
 ## Client
-
+ 
 Minimalistic gui and [connect.py](https://github.com/Amzo/pneumonia/blob/main/Client/client/connect.py) file to add some basic functions to allow sending and receiving replies from the server.
 
 [connect.py](https://github.com/Amzo/pneumonia/blob/main/Client/client/connect.py) can be included into any python script and allow sending files to to the server.
