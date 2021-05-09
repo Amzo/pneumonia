@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 from lib.configparser import parseConfig
+from lib.log import log
+
 import select, socket, sys, random
 from threading import Thread
 import time
@@ -14,25 +16,25 @@ import cv2
 
 host, port = parseConfig('ini/config.ini')
 
+imageName = "pneumonia%s.jpg"
+incomingFolder = "./incomming/"
+modelFolder = "./models/"
+
 # GPU setup
 physical_devices = tf.config.experimental.list_physical_devices('GPU')
 assert len(physical_devices) > 0, "Not enough GPU hardware devices available"
 config = tf.config.experimental.set_memory_growth(physical_devices[0], True)
 
-imageName = "pneumonia%s.jpg"
-incomingFolder = "./temp/"
-modelFolder = "./models/"
-
 def sendMessage(connected, msg):
-	print("Replying: " + msg)
+	log(f"[INFO] Replying to {clientAddress}:  {msg}", "info")
 	connected.sendall(msg.encode())
 
 def requestModel(connected):
-	print("Waiting for model")
+	log(f"[INFO] Waiting for model from {clientAddress}", "info")
 
 	model = connected.recv(4).decode()
 
-	print("Got model: " + model.lower())
+	log("[INFO] Got model: " + model.lower(), "info")
 	model = model.lower()
 	if model == "ince":
 		model = "Inception"
@@ -40,18 +42,20 @@ def requestModel(connected):
 		model = "densenet"
 	elif model == "mycn":
 		model = "myCNN"
-	elif model == "vgg1":
+	elif model == "vgg!":
 		model = "VGG"
 	elif model == "xcep":
 		model = "Xception"
+	elif model == "resn":
+		model = "Resnet"
 	else:
 		model = "fail"
 
 	if model == "fail":
-		print("Returning Error code 3")
+		log(f"[EE] Replying to {clientAddress}: 3", "warning")
 		connected.sendall("3".encode())
 	else:
-		print("returning success")
+		log(f"[INFO] Replying to {clientAddress}: Success", "info")
 		connected.sendall("0".encode())
 		return model
 
@@ -75,7 +79,7 @@ def makePrediction(connected, imageFile, model):
 	else:
 		results = "P"
 
-	print("prediction is " + results)
+	log(f"[INFO] Sending Prediction to {clientAddress}: {results}", "info")
 	connected.sendall(results.encode())
 
 def parseImage(data, saveLocation):
@@ -91,11 +95,11 @@ def parseImage(data, saveLocation):
 def receiveImage(connected):
 	bufferSize = 4096
 
-	print("waiting for image")
+	log(f"[INFO] Waiting for image from {clientAddress}", "info")
 	results = connected.recv(10).decode()
-	print("Sending okay")
+	log(f"[INFO] Sending okay to  {clientAddress}", "info")
 	sendMessage(connected, ("0"))
-	print("Got size: " + results)
+	log("Got size: " + results, "info")
 
 	fileSize = ""
 	for digit in results:
@@ -111,7 +115,6 @@ def receiveImage(connected):
 	i = 0
 
 	count = int(fileSize) / bufferSize
-	print(f"Waiting on file in {count} chunks")
 	while i != int(fileSize):
 		incommingPart = connected.recv(1)
 
@@ -121,17 +124,17 @@ def receiveImage(connected):
 		i += 1
 
 
-	print("Image received")
+	log(f"[INFO] Image received from {clientAddress}", "info")
 	savedName = parseImage(incommingTotal, incomingFolder)
 
 	return savedName
 
 def removeClient(connected, msg):
-	print(f"remove client: {msg}")
+	log(f"remove client {clientAddress}: {msg}", "info")
 	try:
 		clientSockets.remove(connected)
 	except KeyError:
-		print("client already removed")
+		log(f"[WARN] client {clientAddress} already removed", "warning")
 
 	return False
 
@@ -142,10 +145,10 @@ def parseCommand(connected):
 		# Execute the function depending on the request
 		while stillThere:
 			message = ''
-			print("Waiting for next command")
+			log(f"[INFO] Waiting for next command: {clientAddress}", "info")
 
 			while message == '':
-				if timeout >= 20:
+				if timeout >= 60:
 					removeClient(connected, "timeout")
 					stillThere = False
 					break
@@ -154,13 +157,13 @@ def parseCommand(connected):
 				try:
 					message = connected.recv(4).decode()
 				except Exception as e:
-					print(f"{e}")
+					log(f"[ERR] {clientAddress} : {e}", "error")
 					stillThere = removeClient(connected, "Error occured")
 					break
 				timeout += 1
 
 			if stillThere:
-				print("Command: " +message)
+				log(f"[INFO] Command Recv from {clientAddress}: {message}", "info")
 				if message == "FILE":
 					sendMessage(connected, "0")
 					imageFile = receiveImage(connected)
@@ -168,15 +171,12 @@ def parseCommand(connected):
 				elif message == "MODE":
 					sendMessage(connected, "0")
 					selectedModel = requestModel(connected)
-					print("Got model:" + selectedModel)
 				elif message == "PRED":
 					try:
 						selectedModel, imageFile
 					except NameError:
-						print("Sending error 1")
 						sendMessage(connected, "1")
 					else:
-						print("Sending Success")
 						sendMessage(connected, "0")
 						makePrediction(connected, imageFile, selectedModel)
 				elif message == "BYE!":
@@ -184,7 +184,7 @@ def parseCommand(connected):
 					stillThere = removeClient(connected, "bye")
 					break
 				else:
-					print(f"[*] invalid request: {message}")
+					log(f"[WARN] Invalid request from {clientAddress}: {message}", "warning")
 
 def waitForClient(socket):
 	try:
@@ -192,11 +192,11 @@ def waitForClient(socket):
 	except Exception as e:
 		# client no longer connected
 		# remove it from the set
-		print(f"[!] Error: {e}")
+		log(f"[ERR] {clientAddress} : {e}", "Error")
 		try:
 			clientSockets.remove(socket)
 		except Exception as e:
-			print(f"[!] Error: {e}")
+			log(f"[ERR] {clientAddress} : {e}", "error")
 	else:
 		parseCommand(socket)
 
@@ -212,18 +212,15 @@ serverSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 0)
 # bind the socket to the address we specified
 serverSocket.bind((host, int(port)))
 
-# timeout socket after 10 seconds of no command
-socket.setdefaulttimeout(10)
-
 # listen for upcoming connections
 serverSocket.listen(5)
 
-print(f"[*] Starting up server as {host}:{port}")
+log(f"[INFO] Starting up server as {host}:{port}", "info")
 
 while True:
 	# we keep listening for new connections all the time
 	clientSocket, clientAddress = serverSocket.accept()
-	print(f"[+] {clientAddress} connected.")
+	log(f"[INFO] {clientAddress} connected.", "info")
 
 	 # add the new connected client to connected sockets
 	clientSockets.add(clientSocket)

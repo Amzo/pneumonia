@@ -9,5 +9,4 @@ def parseConfig(filename):
 	server = config['Server']
 	port = config['Port']
 
-
 	return server['serverName'], port['port']
