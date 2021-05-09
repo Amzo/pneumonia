@@ -43,7 +43,7 @@ Anthony -
 Gabriela -
 
 
-John -
+John - Ethical Evaluation, Solution Testing
 
 
 Navil -
