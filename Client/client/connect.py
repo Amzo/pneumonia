@@ -79,6 +79,16 @@ def sendImage(imageFile, remote):
 			sendFile.close()
 			print("image file sent")
 
+def disconnect(remote):
+	response = sendMessage("BYE!", remote)
+
+	if response == "0":
+		message = "Disconnected"
+	else:
+		message = "No reply from server"
+
+	return message
+
 def receivePred(remote):
 	response = sendMessage("PRED", remote)
 

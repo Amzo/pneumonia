@@ -19,31 +19,47 @@ class MainWindow(QMainWindow):
 		self.model = ''
 		self.imageFile = ''
 		self.remote = ''
+		self.folderName = ''
+		self.Failed = False
 
 	def connectSignalsSlots(self):
 		imageFile = self.ui.browseFilesButton.clicked.connect(self.bbrowseFiles)
 		self.ui.predictButton.clicked.connect(self.getPrediction)
+		self.ui.fileList.itemSelectionChanged.connect(self.showImage)
 
 	def connect(self):
 		self.remote = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-		self.remote.connect(('127.0.1.1',50022))
+		try:
+			self.remote.connect(('127.0.1.1',50022))
+		except ConnectionRefusedError:
+			self.ui.txtOutput.append("Connection refused")
+			self.failed = True
 
 		response = server.getReply(self.remote)
 
 		if response == "?":
-			print("Connected to server")
+			self.ui.txtOutput.append("Connected to server")
 			return True
 		else:
 			return False
 
-	def bbrowseFiles(self):
-		fileName = file.browseFiles()
-		pixmap = QPixmap(fileName[0])
-		self.ui.lblFilename.setText("Selected Image: " + fileName[0]);
+	def showImage(self):
+		selectedImage = [item.text() for item in self.ui.fileList.selectedItems()]
+		self.imageFile = self.folderName + "/" + selectedImage[0]
+		pixmap = QPixmap(self.imageFile)
 		self.ui.picView.setPixmap(pixmap.scaled(self.ui.picView.width(),self.ui.picView.height()))
-		self.imageFile = fileName[0]
+
+	def bbrowseFiles(self):
+		self.folderName = file.browseFiles()
+		self.ui.lblFilename.setText(self.folderName)
+
+		images = file.addAllPngFiles(self.folderName)
+
+		for item in images:
+			self.ui.fileList.addItem(item)
 
 	def sendModels(self):
+		self.ui.txtOutput.append(f"Sending model: {self.model}")
 		self.model = str(self.ui.modelList.currentText())
 		reply = server.sendModel(self.model, self.remote)
 
@@ -51,13 +67,15 @@ class MainWindow(QMainWindow):
 		connected = self.connect()
 
 		if connected:
-			self.ui.lblPredict.setText("Sending image file")
+			self.ui.txtOutput.append(f"Sending image file: {self.imageFile}")
 			server.sendImage(self.imageFile, self.remote)
 
 			self.sendModels()
 
+			self.ui.txtOutput.append("Waiting for prediction")
 			pred = server.receivePred(self.remote)
 
+			self.ui.txtOutput.append(f"got prediction {pred}")
 			if pred == "P":
 				pred = "Pneumonia"
 			else:

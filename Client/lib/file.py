@@ -10,16 +10,17 @@ from PySide2.QtWidgets import QApplication, QFileDialog
 import glob, os
 
 def browseFiles():
-    openFile = QFileDialog.getOpenFileName(None, 'Select a file:', "",
-        "All Files (*);;Image Files (*.jpeg)")
+    openFile = QFileDialog.getExistingDirectory(None, 'Select a folder:',
+                                '/home/', QFileDialog.ShowDirsOnly)
 
     return openFile
+        #fileInput.setText(openFile)
 
 
 def addAllPngFiles(folderName):
     fileList = list()
     for file in os.listdir(folderName):
-        if file.endswith(".png"):
+        if file.endswith(".jpg") or file.endswith(".jpeg"):
             fileList.append(file)
 
     return fileList
