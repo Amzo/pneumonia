@@ -1,11 +1,11 @@
 # Pneumonia project for KF5012 module
 
 ## Table of contents
-* [Project information](#project-info)
+* [Project information](#project-information)
 * [Technologies](#technologies)
 * [Repository](#repository)
-* [Documentation(#documentation)
-* [Solution Devvelopment Report](#Solution Development report)
+* [Documentation](#documentation)
+* [Solution Development Report](#solution-development-report)
 * [Server](#server)
 * [Client](#client)
 
