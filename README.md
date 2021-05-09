@@ -52,10 +52,16 @@ Navil -
 ## Solution Development report
 
 ### Pipeline Evaluations
-### Model Evaluations
-### Parameter Justifications
 
+Without any pre-processing of the dataset overfitting became problematic, making prediction accuracy very low with the test set. Also as a measure to ensure the models can handle a broad range of variables that could possibly occur in images as they are fed to the pipeline, training and test images went under data augmentation to produce images with possible expected variations. This consisted of rescaling, rotation, zoom, brightness changes, and even horizontal and vertical flips. By doing this it allows the models to be trained against these variations and better understand how to handle them. With the use of this augmentation method, overfitting no longer occurred and as the pipeline is designed for use with even lightweight systems like mobile phones, understanding how new data may be presented to the system has been addressed.
+
+### Model Evaluations
+
+As a baseline model, C-NN was used initially for the system which performed at 73% accuracy. To ensure better accuracy for predictions, alternative models were introduced to the data providing a range of models to test against. By doing this ensembling became possible as a method of connecting the performances of all the models to provide a high accuracy of 93% against the test set and 95% with the optional validation set.
+
+### Parameter Justifications
 ### Reproducible Code
+
 ## Server
 
 This is a simple server written in python which accept numerous commands to be able to receive and image and make a prediction of the image and return the result
