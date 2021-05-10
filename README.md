@@ -16,7 +16,8 @@ This project is experimentation to create a model that uses static images of che
 
 This repository was submitted on 10 May 2021 as the first formative assessment for KV5012 Software Engineering Practice.
 
-A. Donnelly w19008099 anthony.donnelly@northumbria.ac.uk, J. Robson w19036980 john3.robson@northumbria.ac.uk, G. Piatek w18006539 gabriela.piatek@northumbria.ac.uk, N. Hassan w19015723 navil.hassan@northumbria.ac.uk are from the Department of Computer Information Sciences, Faculty of Engineering and Environment, Northumbria University. 
+A. Donnelly w19008099 anthony.donnelly@northumbria.ac.uk, J. Robson w19036980 john3.robson@northumbria.ac.uk, G. Piatek w18006539 gabriela.piatek@northumbria.ac.uk, N. Hassan w19015723 navil.hassan@northumbria.ac.uk are from the 
+Department of Computer Information Sciences, Faculty of Engineering and Environment, Northumbria University. 
 	
 ## Technologies 
 Project is divided into parts such as:
