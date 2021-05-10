@@ -31,9 +31,9 @@ Baseline model
 ## Repository
 The repository of the project contains cnnModels.ipynb, pneumoniaDetect.py, README.md, GUI files, as well as files with our missions. 
 
-The first cnnModels.ipnyb file is the most important file of our project. In this notebook, the project either trained or loaded four additional models on top of our model that we have created. 
+The first cnnModels.ipnyb file is the most important file of our project. In this notebook, the project can be either trained or loaded with five additional models on top of our model that we have created. 
 
-pneumoniaDetect.py file is a copied GUI over.   
+pneumoniaDetect.py file is used for the Graphical Interface.   
 
 README.md file provides all necessary information about the project and files.  
 
@@ -91,9 +91,9 @@ This server can perform the prediction on a server with suitable hardware and al
 
 Any one can use an interface for the following devices:
 
-1. mobile devices
-2. laptops
-3. desktops
+1. Mobile Devices
+2. Laptops
+3. Desktops
 
 An example client is available in the client folder also written in python.
 
