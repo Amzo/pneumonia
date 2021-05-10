@@ -85,7 +85,7 @@ Minimalistic gui and [connect.py](https://github.com/Amzo/pneumonia/blob/main/Cl
 [connect.py](https://github.com/Amzo/pneumonia/blob/main/Client/client/connect.py) can be included into any python script and allow sending files to to the server.
 
 
-An example gui makign use of [connect.py](https://github.com/Amzo/pneumonia/blob/main/Client/client/connect.py) can also be found [here](https://github.com/Amzo/pneumonia/blob/main/Client/pneumoniaDetect.py).
+An example gui making use of [connect.py](https://github.com/Amzo/pneumonia/blob/main/Client/client/connect.py) can also be found [here](https://github.com/Amzo/pneumonia/blob/main/Client/pneumoniaDetect.py).
 
 For full documentation on the client check [here](https://github.com/Amzo/pneumonia/tree/main/Documentation/Anthony/client).
 
