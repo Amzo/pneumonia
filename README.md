@@ -60,7 +60,26 @@ Without any pre-processing of the dataset overfitting became problematic, making
 As a baseline model, C-NN was used initially for the system which performed at 73% accuracy. To ensure better accuracy for predictions, alternative models were introduced to the data providing a range of models to test against. By doing this ensembling became possible as a method of connecting the performances of all the models to provide a high accuracy of 93% against the test set and 95% with the optional validation set.
 
 ### Parameter Justifications
+
+Initially the final activation parameter for the baseline model was sigmoid as we have a binary classification issue
+and this was the most suitable activation function. As we moved onto the iterative development, it was decided to switch
+to softmax and categorical crossentropy so that the model can be retrained on more classes to detect a wider range of
+lung diseases.
+
+The optimiser adam was used as this along with RMSprop provided the highest accuracy yield. In the iterative model
+we switched from Adam to RMSprop as RMSprop was slightly better.
+
+The model layers where kept small 
+
+10 epochs seemed to produce the best output, as anything after this point the model didn't improve much more. Using 10 epochs kept training time
+to an optimal level without being too time consuming.
+
 ### Reproducible Code
+
+For reproducing all experiments, the trained models are saved onto google drive and can be fetched within
+the google colaboration file using shell script. The training history pickle file is also fetched so that
+the training accuracy and training loss can be visualised as well as the validation loss.
+
 
 ## Server
 
