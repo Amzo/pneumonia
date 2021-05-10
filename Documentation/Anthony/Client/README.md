@@ -37,8 +37,6 @@ These are a list of functions used by connect.py to communicate with the server.
  
 	RESN - Resnet Model 
  
-	ENSM - Ensembled model 
- 
 ### sendImage(imageFile, connection) 
  	Sends the image file to the server 
  
